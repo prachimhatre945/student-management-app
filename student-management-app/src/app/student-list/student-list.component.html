@@ -1,0 +1,47 @@
+<div class="box">
+    <div class="fixed">
+        <div class="button">
+            <button mat-raised-button color="primary" type="submit" (click)="add()">Add new Student</button>
+        </div>
+        <div class="title">
+            <p> Students Information </p>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <table mat-table [dataSource]="dataSource">
+
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <td mat-cell *matCellDef="let element" class="actions-cell">
+                    <button mat-icon-button class="action-button" (click)="editStudent(element)">
+                        <mat-icon aria-label="Edit">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button class="action-button" (click)="deleteStudent(element)">
+                        <mat-icon aria-label="Delete">delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <ng-container *ngFor="let column of displayedColumns.slice(1)">
+                <ng-container [matColumnDef]="column">
+                    <th mat-header-cell *matHeaderCellDef>
+                        {{ headersMapping[column] }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <ng-container *ngIf="column === 'dateOfBirth'; else otherColumn">
+                            {{ element[column] ? (element[column] | date) : "-" }}
+                        </ng-container>
+                        <ng-template #otherColumn>
+                            {{ element[column] ? element[column] : '-'}}
+                        </ng-template>
+                    </td>
+                </ng-container>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="['actions'].concat(displayedColumns.slice(1))"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['actions'].concat(displayedColumns.slice(1));"></tr>
+        </table>
+    </div>
+
+</div>

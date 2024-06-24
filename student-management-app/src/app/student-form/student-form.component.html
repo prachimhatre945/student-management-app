@@ -1,0 +1,172 @@
+<div class="wrapper">
+    <mat-card appearance="outlined">
+        <mat-card-header>
+            <p >Student Registration Form</p>
+        </mat-card-header>
+        <form [formGroup]="studentForm">
+            <mat-card appearance="outlined">
+                <mat-card-header>
+                    <mat-card-title> Personal Information</mat-card-title>
+                </mat-card-header>
+                <div class="box1">
+                <div>
+                    <mat-form-field>
+                        <mat-label>First Name</mat-label>
+                        <input matInput formControlName="firstName">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Middle Name</mat-label>
+                        <input matInput formControlName="middleName">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field >
+                        <mat-label>Date of Birth</mat-label>
+                        <input matInput [matDatepicker]="dobPicker" placeholder="Choose a date"
+                            formControlName="dateOfBirth">
+                        <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #dobPicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Last Name</mat-label>
+                        <input matInput formControlName="lastName">
+                    </mat-form-field>
+                </div>
+             
+                <div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Blood Group</mat-label>
+                        <mat-select [(value)]="selectedBloodGroup" placeholder="Select" formControlName="bloodGroup">
+                            <mat-option *ngFor="let group of bloodGroups" [value]="group">
+                                {{ group }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <p class="gender">Select Gender</p>
+                    <mat-radio-group formControlName="gender">
+                        <mat-radio-button value="male">Male</mat-radio-button>
+                        <mat-radio-button value="female">Female</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                </div>
+            </mat-card>
+            <br>
+            <mat-card appearance="outlined">
+                <mat-card-header>
+                    <mat-card-title>Contact Information</mat-card-title>
+                </mat-card-header>
+                <div class="box2">
+                <div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>State</mat-label>
+                        <input type="text" placeholder="Enter state" matInput formControlName="state"
+                            [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let state of filteredStates | async" [value]="state">
+                                {{ state }}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Country</mat-label>
+                        <input type="text" placeholder="Enter country" matInput formControlName="country"
+                            [matAutocomplete]="country">
+                        <mat-autocomplete #country="matAutocomplete">
+                            <mat-option *ngFor="let country of filteredCountries | async" [value]="country">
+                                {{ country }}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Enter City</mat-label>
+                        <input matInput formControlName="city">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Enter Pin Code</mat-label>
+                        <input matInput formControlName="pincode">
+                    </mat-form-field>
+                </div>
+                <div >
+                    <mat-form-field appearance="fill">
+                        <mat-label>Mobile Number</mat-label>
+                        <input matInput placeholder="836675673" formControlName="mobileNumber">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Email Id</mat-label>
+                        <input matInput formControlName="email" placeholder="abc@gmail.com">
+                    </mat-form-field>
+                </div>
+            </div>
+            </mat-card>
+            <br>
+            <mat-card appearance="outlined">
+                <mat-card-header>
+                    <mat-card-title>Course Information</mat-card-title>
+                </mat-card-header>
+                <div class="box3">
+                <div>
+                    <mat-form-field>
+                        <mat-label>Institute Name</mat-label>
+                        <input matInput formControlName="institute">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <p class="gender">Selct Course Type</p>
+                    <mat-radio-group formControlName="courseType">
+                        <mat-radio-button value="undergraduate">Undergraduate</mat-radio-button>
+                        <mat-radio-button value="postgraduate">Postgraduate</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div>
+                    <mat-form-field *ngIf="this.studentForm?.get('courseType')?.value == 'undergraduate'">
+                        <mat-label>Undergraduate Streams</mat-label>
+                        <mat-select formControlName="stream">
+                            <mat-option *ngFor="let stream of streamsForUndergraduate" [value]="stream">
+                                {{ stream }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field *ngIf="this.studentForm?.get('courseType')?.value == 'postgraduate'">
+                        <mat-label>Postgraduate Streams</mat-label>
+                        <mat-select formControlName="stream">
+                            <mat-option *ngFor="let stream of streamsForPostgraduate" [value]="stream">
+                                {{ stream }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Duration</mat-label>
+                        <mat-select formControlName="duration">
+                            <mat-option *ngFor="let duration of durations" [value]="duration">
+                                {{ duration }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            </mat-card>
+            <div class="button">
+                <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Submit</button>
+            </div>
+        </form>
+    </mat-card>
+</div>
+
+

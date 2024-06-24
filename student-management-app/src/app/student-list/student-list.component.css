@@ -1,0 +1,60 @@
+.actions-cell {
+  display: flex;
+  align-items: center;
+}
+
+.action-button {
+  margin-right: 8px;
+}
+.wrapper {
+  width: 80vw;
+  overflow-x: auto;
+  margin: 0 auto;
+  border: 1px solid rgb(194, 185, 185);
+  border-radius: 5px;
+}
+.title {
+  display: flex;
+  justify-content: center;
+  margin-top: -57px
+}
+p {
+  font-size: 20px;
+  font-weight: 500;
+  margin: auto;
+  font-family: cursive;
+  margin: 3vh;
+}
+.mat-table {
+  width: 100%;
+  table-layout: auto;
+}
+.box {
+  margin-top: 8vh;
+}
+
+.mat-header-row,
+.mat-row {
+  min-width: fit-content;
+}
+::ng-deep.mat-mdc-table {
+  padding: 20px;
+  white-space: nowrap;
+}
+.button{
+    display: flex;
+    justify-content: end;
+    padding: 8px;
+    margin-right: 115px;
+}
+::ng-deep.mat-mdc-table {
+    table-layout: unset;
+    white-space: nowrap !important;
+}
+::ng-deep.mdc-data-table__table {
+    min-width: 100%;
+    border: 0;
+    white-space: nowrap;
+    border-spacing: 0;
+    table-layout: fixed;
+}
